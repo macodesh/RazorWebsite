@@ -1,0 +1,17 @@
+﻿@* Essa diretiva indica que essa é uma página "Razor". *@
+@page
+@* Essa diretiva especifica o tipo de modelo dessa página. *@
+@model IndexModel
+@* "@" representa a sintaxe Razor. *@
+@{
+    @* Título renderizado na página. *@
+    ViewData["Title"] = "A Casa dos Amantes de Pizza";
+    @* Obtém o tempo decorrido desde a data estabelecida. *@
+    TimeSpan timeInBusiness = DateTime.Now - new DateTime(2018, 8, 14);
+}
+
+<div class="text-center">
+    <h1 class="display-4">Boas-vindas ao Contoso Pizza</h1>
+    @* Converte o tempo para dias e depois para um número inteiro. *@
+    <p class="lead">A melhor pizza da cidade por @Convert.ToInt32(timeInBusiness.TotalDays) dias!</p>
+</div>
