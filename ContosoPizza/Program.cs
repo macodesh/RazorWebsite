@@ -10,8 +10,6 @@ builder.Services.AddRazorPages();
 builder.Services.AddDbContext<PizzaContext>(options =>
     options.UseSqlite("Data Source=ContosoPizza.db"));
 
-// Registra a classe PizzaService no container de injeção de dependência.
-// O método AddScoped indica que um objeto PizzaService é criado a cada requisição HTTP.
 builder.Services.AddScoped<PizzaService>();
 
 var app = builder.Build();

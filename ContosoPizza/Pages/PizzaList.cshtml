@@ -1,21 +1,15 @@
 ﻿@page
 @model ContosoPizza.Pages.PizzaListModel
-@* ViewData é um dicionário usado para passar dados entre a página Razor e o model *@
 @{
     ViewData["Title"] = "Lista de Pizzas 🍕";
 }
 
-@* Formulário para novas pizzas *@
-
 <form method="post">
-    @* Exibe erros de validação para todo o formulário. *@
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
     <div class="form-group">
-        @* asp-for associa o elemento à propriedade de NewPizza. *@
         <label asp-for="NewPizza.Name" class="control-label">Nome</label>
         <input asp-for="NewPizza.Name" class="form-control" />
-        @* Exibe os erros de validação para esse campo. *@
         <span asp-validation-for="NewPizza.Name" class="text-danger"></span>
     </div>
 
@@ -33,8 +27,6 @@
     <div class="form-group form-check">
         <label class="form-check-label">
             <input class="form-check-input" asp-for="NewPizza.IsGlutenFree" />
-            @* Exibe o nome de uma propriedade na página. *@
-            @* @Html.DisplayNameFor(model => model.NewPizza.IsGlutenFree) *@
             Livre de Glúten
         </label>
     </div>
@@ -46,12 +38,9 @@
     </div>
 
     <div class="form-group">
-        @* Envia uma requisição POST quando a pessoa usuária clicar no botão. *@
         <input type="submit" value="Criar" class="btn btn-primary" />
     </div>
 </form>
-
-@* Lista de pizzas *@
 
 <table class="table mt-5">
     <thead>
@@ -65,25 +54,16 @@
     </thead>
 
     <tbody>
-        @* Exibe as pizzas apenas se a lista de pizzas não estiver vazia. *@
         @if (Model.PizzaList != null)
         {
-            @* Renderiza uma linha na tabela para cada elemento da lista de pizzas. *@
-            @* A propriedade Model se refere neste caso ao PizzaListModel criado no code-behind. *@
             @foreach (var pizza in Model.PizzaList)
             {
-                @* As propriedades do elemento "pizza" são renderizados nas colunas. *@
                 <tr>
                     <td>@pizza.Name</td>
-                    @* Interpolação de string. *@
-                    @* :C formata para exibição como moeda, de acordo com a localidade definida no sistema. *@
                     <td>@($"{pizza.Price:C}")</td>
                     <td>@pizza.Size</td>
-                    @* Operador de decisão if/else ternário. *@
                     <td>@(pizza.IsGlutenFree ? "✔️" : string.Empty)</td>
                     <td>
-                        @* O envio desse formulário é pelo método POST. *@
-                        @* É enviado o Id da pizza para o manipulador Delete no arquivo code-behind. *@
                         <form method="post" asp-page-handler="Delete" asp-route-id="@pizza.Id">
                             <button class="btn btn-danger">Excluir</button>
                         </form>
@@ -93,7 +73,6 @@
         }
         else
         {
-            @* Exibe uma mensagem caso não tenham pizzas. *@
             <tr>
                 <td colspan="5">Nenhuma pizza encontrada.</td>
             </tr>
@@ -101,8 +80,6 @@
     </tbody>
 </table>
 
-@* Injeta os scripts de validação no lado cliente da página. *@
-@* Validam a entrada da pessoa usuária antes que sejam enviados ao servidor. *@
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }

@@ -15,5 +15,4 @@ public class Pizza
     public decimal Price { get; set; }
 }
 
-// Exibe o tamanho das pizzas de acordo com o número que vem do BD.
 public enum PizzaSize { Pequena, Média, Grande }
