@@ -14,21 +14,15 @@ namespace ContosoPizza.Pages
         public Pizza NewPizza { get; set; } = default!;
 
         public PizzaListModel(PizzaService service)
-        {
-            _service = service;
-        }
+        { _service = service; }
 
         public void OnGet()
-        {
-            PizzaList = _service.GetPizzas();
-        }
+        { PizzaList = _service.GetPizzas(); }
 
         public IActionResult OnPost()
         {
             if (!ModelState.IsValid || NewPizza == null)
-            {
                 return Page();
-            }
 
             _service.AddPizza(NewPizza);
             return RedirectToAction("Get");
