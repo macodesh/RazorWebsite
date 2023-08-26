@@ -22,7 +22,9 @@ namespace ContosoPizza.Pages
         public IActionResult OnPost()
         {
             if (!ModelState.IsValid || NewPizza == null)
+            {
                 return Page();
+            }
 
             _service.AddPizza(NewPizza);
             return RedirectToAction("Get");
